@@ -3,16 +3,16 @@ import tensorflow as tf
 class BottleNeckBlock_3n(tf.keras.Model):
     def __init__(self, filters, kernel_size):
         super(BottleNeckBlock_3n, self).__init__(name='')
-        self.conv1 =tf.keras.layers.Conv2D(filters, kernel_size, padding='same')
+        self.conv1 =tf.keras.layers.Conv2D(filters, kernel_size, padding='valid')
         self.bn1 = tf.keras.layers.BatchNormalization()
 
         self.conv2 = tf.keras.layers.Conv2D(filters, kernel_size*3, padding='same')
         self.bn2 = tf.keras.layers.BatchNormalization()
 
-        self.conv3 =tf.keras.layers.Conv2D(filters*4, kernel_size, padding='same')
+        self.conv3 =tf.keras.layers.Conv2D(filters*4, kernel_size, padding='valid')
         self.bn3 = tf.keras.layers.BatchNormalization()
 
-        self.shortcut_conv = tf.keras.layers.Conv2D(filters*4, kernel_size, padding='same')
+        self.shortcut_conv = tf.keras.layers.Conv2D(filters*4, kernel_size, padding='valid')
         self.shortcut_bn = tf.keras.layers.BatchNormalization()
 
         self.act = tf.keras.layers.Activation('relu')
@@ -33,6 +33,9 @@ class BottleNeckBlock_3n(tf.keras.Model):
         x = self.conv3(x)
         x = self.bn3(x)
         x = self.act(x)
+
+        print('x_before: {}'.format(x.shape))
+        print('input_tensor_before: {}'.format(shortcut.shape))
 
         if x.shape[3] != input_tensor.shape[3]:
             shortcut = self.shortcut_conv(shortcut)

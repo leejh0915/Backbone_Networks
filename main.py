@@ -22,7 +22,7 @@
 #     print(test_acc)
 
 from core.backbone.ResNet.ResNet import ResNet50
-from data.fashion_mnist import Fashion_mnist
+from data.tensorflow.fashion_mnist import Fashion_mnist
 
 if __name__ == "__main__":
     #load fashion_mnist data
@@ -36,7 +36,7 @@ if __name__ == "__main__":
                   metrics=['accuracy'])
 
 
-    history = model.fit(x_train, y_train, epochs=10, validation_split=0.25)
+    history = model.fit(x_train, y_train, batch_size=32, epochs=10, validation_split=0.25)
 
     # model evaluate
     test_loss, test_acc = model.evaluate(x_test, y_test)

@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 from core.backbone.ResNet.BottleNeck import BottleNeckBlock_3n
 
 class ResNet50(tf.keras.Model):
@@ -21,6 +22,10 @@ class ResNet50(tf.keras.Model):
 
   def call(self, inputs):
       #x = self.resize(inputs)
+
+      inputs = tf.image.resize(inputs, [224, 224])
+      inputs = np.expand_dims(inputs, axis=-1)
+      #inputs = inputs.reshape(-1, 224, 224, 1)
 
       x = self.conv(inputs)
       x = self.bn(x)
