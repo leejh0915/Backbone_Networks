@@ -20,8 +20,6 @@ class BottleNeckBlock_3n(nn.Module):
         self.batch_norm3 = nn.BatchNorm2d(nout)
         self.relu3 = nn.ReLU(True)
 
-        self.add = torch.cat()
-
     def forward(self, x):
         out = self.conv1(x)
         out = self.batch_norm1(out)
@@ -35,6 +33,6 @@ class BottleNeckBlock_3n(nn.Module):
         out = self.batch_norm3(out)
         out = self.relu3(out)
 
-        out = torch.cat(x, out)
+        out = torch.add(x, out)
 
         return out
