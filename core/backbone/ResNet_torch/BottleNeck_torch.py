@@ -66,10 +66,9 @@ import numpy as np
 #         return out
 
 class BottleNeckBlock_1(nn.Module):
-    def __init__(self, nin, nout, kernel_size, bottleneck_num, stride=2):
+    def __init__(self, nin, nout, kernel_size, bottleneck_num):
         super(BottleNeckBlock_1, self).__init__()
         self.bottleneck_num = bottleneck_num
-        self.stride = stride
 
 
         #첫번째 블록에서의 채널값 맞춰주기
@@ -92,8 +91,8 @@ class BottleNeckBlock_1(nn.Module):
     def forward(self, x):
         for i in range(self.bottleneck_num):
             input = x
-            print('i: {}'.format(i))
-            print('input_shape: {}'.format(input.shape))
+            # print('i: {}'.format(i))
+            # print('input_shape: {}'.format(input.shape))
 
             if i == 0:
                 input = self.conv_init(x)
@@ -146,8 +145,8 @@ class BottleNeckBlock_n(nn.Module):
     def forward(self, x):
         for i in range(self.bottleneck_num):
             input = x
-            print('i: {}'.format(i))
-            print('input_shape: {}'.format(input.shape))
+            # print('i: {}'.format(i))
+            # print('input_shape: {}'.format(input.shape))
 
             if i == 0:
                 x = self.conv_ch_resize(x)

@@ -15,7 +15,7 @@ class ResNet50(nn.Module):
         self.relu = nn.ReLU(True)
         self.max_pool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
 
-        self.bottle1 = BottleNeckBlock_1(nin=64, nout=256, kernel_size=1, bottleneck_num=self.iter[0], stride=1)
+        self.bottle1 = BottleNeckBlock_1(nin=64, nout=256, kernel_size=1, bottleneck_num=self.iter[0])
         self.bottle2 = BottleNeckBlock_n(nin=128, nout=512, kernel_size=1, bottleneck_num=self.iter[1])
         self.bottle3 = BottleNeckBlock_n(nin=256, nout=1024, kernel_size=1, bottleneck_num=self.iter[2])
         self.bottle4 = BottleNeckBlock_n(nin=512, nout=2048, kernel_size=1, bottleneck_num=self.iter[3])

@@ -11,7 +11,7 @@ print(torch.__version__)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(device)
 
-batch_size = 64
+batch_size = 32
 validation_ratio = 0.1
 random_seed = 10
 initial_lr = 0.1
