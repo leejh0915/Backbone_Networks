@@ -31,7 +31,7 @@ class DenseBlock(nn.Module):
         x = self.conv_2(x)
 
         x = F.dropout(x, p=self.drop_rate, training=self.training) #self.training은 nn.Module에서...
-        x = torch.cat([x,input], dim=1)
+        x = torch.cat([x, input], dim=1)
 
         return x
 
@@ -39,5 +39,15 @@ class TransitionLayer(nn.Module):
     def __init__(self, nin, nout, kernel_size, bottleneck_num):
         super(TransitionLayer, self).__init__()
 
+        self.bn = nn.BatchNorm2d(nin)
+        self.relu = nn.ReLU(True)
+        self.conv = nn.Conv2d(in_channels=nin, out_channels=nout*4, kernel_size=kernel_size, stride=1, padding=0) #4*k
+        self.pool = nn.AvgPool2d(kernel_size=2, stride=2, padding=0)
+
     def forward(self, x):
-        pass
+        x = self.bn(x)
+        x = self.relu(x)
+        x = self.conv(x)
+        x = self.pool(x)
+
+        return x
