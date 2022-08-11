@@ -8,16 +8,12 @@ from torch.utils import data as D
 
 #아래 부분들은 class화 시켜서 정리할 것
 
-batch_size = 64
-validation_ratio = 0.1
-random_seed = 10
-
 class torch_load_cifar10:
     def __init__(self, batch_size=64, validation_ratio=0.1, random_seed=10):
         transform_train = transforms.Compose([
-            transforms.Resize(256),
-            transforms.RandomCrop(224),
-            transforms.RandomHorizontalFlip(),
+            transforms.Resize(224),
+            # transforms.RandomCrop(224),
+            # transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
             transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2470, 0.2435, 0.2616))])
 

@@ -21,6 +21,10 @@ data = torch_load_cifar10()
 
 train_loader, valid_loader, test_loader = data.get_data()
 
+print('train: {}'.format(train_loader))
+print('valid: {}'.format(valid_loader))
+print('test: {}'.format(test_loader))
+
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
