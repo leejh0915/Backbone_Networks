@@ -5,6 +5,7 @@ import torch.optim as optim
 import torchsummary
 
 from core.backbone.ResNet_torch.ResNet_torch import ResNet50
+from core.backbone.DenseNet_torch.DenseNet_torch import DenseNet121
 from data.torch.cifar10_torch import torch_load_cifar10
 
 print(torch.__version__)
@@ -17,6 +18,8 @@ random_seed = 10
 initial_lr = 0.1
 num_epoch = 20
 
+mode = 'densenet'
+
 data = torch_load_cifar10()
 
 train_loader, valid_loader, test_loader = data.get_data()
@@ -28,7 +31,12 @@ print('test: {}'.format(test_loader))
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-net = ResNet50()
+if mode == 'resnet':
+    net = ResNet50()
+elif mode == 'densenet':
+    net = DenseNet121()
+
+
 net.to(device)
 
 torchsummary.summary(net, (3, 224, 224))
